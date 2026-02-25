@@ -1107,6 +1107,233 @@ header {
 
 
 
+.card-viewer {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 450px;
+    height: 300px;
+    margin: 20px auto;
+}
+
+.flip-card {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    border-color: var(--accent);
+}
+
+.exam-tip {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+}
+
+
+
+:root {
+    --flip-speed: 0.6s;
+    --bounce-curve: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-viewer {
+    perspective: 1200px; /* Increased depth */
+    width: 100%;
+    max-width: 450px;
+    height: 320px;
+    margin: 30px auto;
+}
+
+.flip-card {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* For the lift effect */
+}
+
+/* Floating & Hover State */
+.flip-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(1deg);
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform var(--flip-speed) var(--bounce-curve);
+    transform-style: preserve-3d;
+}
+
+/* The Flip Trigger */
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg) scale(1.02); /* Slight scale-up during flip */
+}
+
+/* Glass Sides Styling */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Critical for glitch-free flip */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 35px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Back Side Polish */
+.flip-card-back {
+    transform: rotateY(180deg);
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(56, 189, 248, 0.05));
+}
+
+/* Shimmer Sweep Animation */
+.flip-card::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+    transform: rotate(45deg);
+    animation: shimmerSweep 6s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmerSweep {
+    0% { transform: translate(-50%, -50%) rotate(45deg); }
+    20%, 100% { transform: translate(50%, 50%) rotate(45deg); }
+}
+
+
+/* Card Category Tag */
+.card-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 5px 12px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Flip Hint styling */
+.flip-hint {
+    position: absolute;
+    bottom: 20px;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.flip-hint i {
+    animation: rotateHint 3s infinite linear;
+}
+
+@keyframes rotateHint {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+.coin-stage {
+    perspective: 1200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.coin {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 3s cubic-bezier(0.1, 0.5, 0.2, 1);
+}
+
+.coin div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+.side-a { 
+    background: linear-gradient(135deg, var(--accent), var(--accent-purple)); 
+    color: white;
+}
+
+.side-b { 
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent)); 
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Result Highlighting */
+.winner-glow {
+    animation: winPulse 1s infinite alternate;
+    color: var(--accent) !important;
+    font-weight: 800;
+}
+
+@keyframes winPulse {
+    from { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); transform: scale(1); }
+    to { text-shadow: 0 0 25px rgba(56, 189, 248, 0.8); transform: scale(1.1); }
+}
+
+
     </style>
 </head>
 <body>
@@ -1238,17 +1465,21 @@ header {
                     <h3>Calculator</h3>
                     <p>Quick computations</p>
                 </div>
-                <div class="app-card" onclick="openApp('calendar')">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Calendar</h3>
-                    <p>View schedule</p>
+
+
+                <div class="app-card" onclick="openApp('toss-app')">
+                    <i class="fas fa-coins"></i>
+                    <h3>Coin Toss</h3>
+                    <p>Chance Simulator</p>
                 </div>
-                
-               <div class="app-card" onclick="openApp('weather')">
-    <i class="fas fa-cloud-sun"></i>
-    <h3>Weather</h3>
-    <p>Local Forecast</p>
-</div>
+               
+ 
+                <div class="app-card" onclick="openApp('smart-cards')">
+                    <i class="fas fa-clone"></i>
+                    <h3>Smart Cards</h3>
+                    <p>Dynamic flashcards</p>
+                </div>
+               
 
 <div class="app-card" onclick="openApp('study-corner')">
     <i class="fas fa-graduation-cap"></i>
@@ -1261,6 +1492,7 @@ header {
     <h3>OX Game</h3>
     <p>Boredom Buster</p>
 </div>
+
 
 <div class="app-card" onclick="openApp('focus-timer')">
     <i class="fas fa-stopwatch"></i>
@@ -1377,52 +1609,90 @@ header {
     </div>
 </div>
 
-        <div id="calendar" class="screen">
-            <div class="app-header">
-                <button class="btn-back" onclick="goHome()"><i class="fas fa-arrow-left"></i></button>
-                <h2 id="current-month-year">Calendar</h2>
-            </div>
-            <div class="cal-container">
-                <div class="cal-grid" id="cal-grid">
-                    </div>
-            </div>
-        </div>
-        <div id="weather" class="screen">
+
+<div id="toss-app" class="screen">
     <div class="app-header">
         <button class="btn-back" onclick="goHome()"><i class="fas fa-arrow-left"></i></button>
-        <h2>Weather Station</h2>
+        <h2>Decision Toss</h2>
     </div>
 
-    <div class="weather-container">
-        <div id="weather-card" class="weather-main-card">
-            <h2 id="w-city" style="margin-bottom: 5px;">Detecting Location...</h2>
-            <span id="w-date" style="color: #94a3b8; font-size: 0.9rem;">Thursday, 19 Feb</span>
-            
-            <div id="w-icon-container">
-                <i id="w-icon" class="fas fa-sun weather-icon-lg"></i>
-            </div>
-            
-            <h1 id="w-temp" style="font-size: 4rem; margin: 0;">--°C</h1>
-            <p id="w-desc" style="text-transform: capitalize; letter-spacing: 1px;">Clear Sky</p>
-            
-            <div class="weather-stats-grid">
-                <div class="stat-item"><span class="stat-label">Feels Like</span><span class="stat-val" id="w-feels">--°</span></div>
-                <div class="stat-item"><span class="stat-label">Humidity</span><span class="stat-val" id="w-humidity">--%</span></div>
-                <div class="stat-item"><span class="stat-label">Wind</span><span class="stat-val" id="w-wind">-- km/h</span></div>
-            </div>
-
-            <div class="weather-stats-grid" style="margin-top: 15px;">
-                <div class="stat-item"><span class="stat-label">Pressure</span><span class="stat-val" id="w-pressure">-- hPa</span></div>
-                <div class="stat-item"><span class="stat-label">Sunrise</span><span class="stat-val" id="w-sunrise">--:--</span></div>
-                <div class="stat-item"><span class="stat-label">Sunset</span><span class="stat-val" id="w-sunset">--:--</span></div>
+    <div class="toss-container">
+        <div class="decision-inputs glass-card">
+            <div class="input-group">
+                <input type="text" id="opt-1" class="auth-input" placeholder="Option A (e.g. Study)">
+                <span class="vs-badge">VS</span>
+                <input type="text" id="opt-2" class="auth-input" placeholder="Option B (e.g. Sleep)">
             </div>
         </div>
 
-        <h3 style="margin-top: 30px; font-weight: 300;">7-Day Forecast</h3>
-        <div class="forecast-strip" id="forecast-container">
+        <div class="coin-stage">
+            <div id="coin" class="coin">
+                <div class="side-a"><i class="fas fa-font"></i></div>
+                <div class="side-b"><i class="fas fa-bold"></i></div>
             </div>
+        </div>
+
+        <div class="toss-controls">
+            <button id="toss-btn" onclick="executeToss()" class="btn-auth pulse">
+                <i class="fas fa-dice"></i> FLIP COIN
+            </button>
+            <br><br><center><div id="toss-result" class="result-display">Waiting for toss...</div></center>
+        </div>
     </div>
 </div>
+
+
+        
+
+
+
+<div id="smart-cards" class="screen">
+    <div class="app-header">
+        <button class="btn-back" onclick="goHome()"><i class="fas fa-arrow-left"></i></button>
+        <h2>Smart Flashcards</h2>
+    </div>
+
+    <div class="flashcard-container">
+        <div class="card-controls glass-card">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="card-search" placeholder="Search topics (e.g. Pointers, Lists...)" onkeyup="filterCards()">
+            </div>
+            <select id="card-subject-filter" onchange="filterCards()" class="auth-input">
+                <option value="all">All Subjects</option>
+                <option value="c">C Programming</option>
+                <option value="py">Python</option>
+                <option value="java">Java</option>
+                <option value="ds">Data Structures</option>
+            </select>
+        </div>
+
+        <div class="card-viewer">
+            <div class="flip-card" id="main-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front glass-card">
+                        <span class="card-tag" id="card-tag">Subject</span>
+                        <h3 id="card-q">Click to reveal the answer</h3>
+                        <p class="flip-hint"><i class="fas fa-sync"></i> Click to Flip</p>
+                    </div>
+                    <div class="flip-card-back glass-card">
+                        <h3>Explanation</h3>
+                        <p id="card-a">Answer text goes here.</p>
+                        <div id="card-tip" class="exam-tip"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-nav">
+            <button onclick="prevCard()" class="filter-btn active"><i class="fas fa-chevron-left"></i></button>
+            <span id="card-counter">Card 0 of 0</span>
+            <button onclick="nextCard()" class="filter-btn active"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</div>
+
+        
 
 <div id="study-corner" class="screen">
     <div class="app-header">
@@ -1752,26 +2022,7 @@ header {
             document.getElementById('calc-display').value = calcVal;
         }
 
-        // Calendar Logic
-        function renderCalendar() {
-            const grid = document.getElementById('cal-grid');
-            const now = new Date();
-            const month = now.toLocaleString('default', { month: 'long' });
-            document.getElementById('current-month-year').innerText = `${month} ${now.getFullYear()}`;
-            
-            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            dayNames.forEach(d => grid.innerHTML += `<div class="cal-day-name">${d}</div>`);
-            
-            const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
-            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-
-            for(let i=0; i<firstDay; i++) grid.innerHTML += `<div></div>`;
-            for(let i=1; i<=daysInMonth; i++) {
-                const isToday = i === now.getDate() ? 'style="background:var(--accent); color:black; border-radius:50%"' : '';
-                grid.innerHTML += `<div ${isToday}>${i}</div>`;
-            }
-        }
-   
+       
   // --- Updated Login & Security Logic ---
 
 // Run this on page load
@@ -1959,73 +2210,10 @@ function deleteCalc() {
     document.getElementById('calc-display').value = calcVal;
 }
 
-const WEATHER_API_KEY = 'YOUR_API_KEY'; // Get yours for free at openweathermap.org
 
-function openApp(id) {
-    if (!localStorage.getItem('nexus_active_session')) {
-        alert("⚠️ SECURITY ALERT: Unauthorized Access. Please Sign In.");
-        document.getElementById('auth-overlay').style.display = 'flex';
-        return;
-    }
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    
-    if(id === 'weather') initWeather();
-    if(id === 'tasks') renderTasks();
-}
 
-function initWeather() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            getWeatherData(position.coords.latitude, position.coords.longitude);
-        }, () => {
-            alert("Unable to retrieve location. Defaulting to London.");
-            getWeatherData(51.5074, -0.1278);
-        });
-    }
-}
 
-async function getWeatherData(lat, lon) {
-    try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`);
-        const data = await response.json();
-        updateWeatherUI(data);
-    } catch (error) {
-        console.error("Weather Error:", error);
-    }
-}
 
-function updateWeatherUI(data) {
-    document.getElementById('w-city').innerText = data.name;
-    document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C`;
-    document.getElementById('w-desc').innerText = data.weather[0].description;
-    document.getElementById('w-humidity').innerText = `${data.main.humidity}%`;
-    document.getElementById('w-wind').innerText = `${data.wind.speed} km/h`;
-    document.getElementById('w-feels').innerText = `${Math.round(data.main.feels_like)}°`;
-    document.getElementById('w-pressure').innerText = data.main.pressure;
-    
-    // Convert Sunrise/Sunset
-    const formatTime = (unix) => new Date(unix * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    document.getElementById('w-sunrise').innerText = formatTime(data.sys.sunrise);
-    document.getElementById('w-sunset').innerText = formatTime(data.sys.sunset);
-
-    // Dynamic Icons & Card Glow
-    const iconMapping = {
-        'Clear': 'fa-sun',
-        'Clouds': 'fa-cloud',
-        'Rain': 'fa-cloud-showers-heavy',
-        'Snow': 'fa-snowflake',
-        'Thunderstorm': 'fa-bolt'
-    };
-    const mainWeather = data.weather[0].main;
-    const iconClass = iconMapping[mainWeather] || 'fa-cloud';
-    
-    const iconEl = document.getElementById('w-icon');
-    iconEl.className = `fas ${iconClass} weather-icon-lg`;
-    
-    const card = document.getElementById('weather-card');
-    card.className = 'weather-main-card ' + (mainWeather === 'Clear' ? 'sun-glow' : 'rain-glow');
-}
 
 // --- Expanded Knowledge Base & Quiz Bank ---
 const studyData = {
@@ -2586,6 +2774,168 @@ window.addEventListener('load', () => {
     }, 3500);
 });
 
+
+
+
+const flashcardDB = [
+    // --- C PROGRAMMING (11 Cards) ---
+    { sub: "c", t: "Pointers", q: "What is a NULL pointer?", a: "A pointer that doesn't point to any memory location (stores 0).", tip: "Always check if(ptr != NULL) before using it." },
+    { sub: "c", t: "Memory", q: "Difference between malloc() and calloc()?", a: "malloc() allocates raw memory; calloc() allocates and clears it to zero.", tip: "calloc is slightly slower but safer." },
+    { sub: "c", t: "Storage Classes", q: "What does 'static' do in C?", a: "It preserves the variable's value even after its scope ends.", tip: "Useful for counting function calls." },
+    { sub: "c", t: "Dangling Pointer", q: "What is a Dangling Pointer?", a: "A pointer pointing to a memory location that has been freed.", tip: "Set pointers to NULL after calling free()." },
+    { sub: "c", t: "Preprocessors", q: "Difference between #include < > and \" \"?", a: "< > searches system paths; \" \" searches current directory first.", tip: "Use < > for standard libs and \" \" for your files." },
+    { sub: "c", t: "Sizeof", q: "Is sizeof an operator or a function?", a: "It is a unary operator, not a function.", tip: "Evaluated at compile time." },
+    { sub: "c", t: "Typedef", q: "What is the use of typedef?", a: "Creates an alias name for existing data types.", tip: "Makes code more readable, especially with structures." },
+    { sub: "c", t: "Arrays", q: "Are array names pointers?", a: "No, but they decay into a pointer to the first element.", tip: "You cannot change the address of an array name." },
+    { sub: "c", t: "Strings", q: "How are strings terminated in C?", a: "With the null character '\\0'.", tip: "Remember to add +1 to your array size for this." },
+    { sub: "c", t: "Struct vs Union", q: "Main difference between Struct and Union?", a: "Structs give each member its own memory; Unions share one memory space.", tip: "Union size = size of largest member." },
+    { sub: "c", t: "Volatile", q: "What is the 'volatile' keyword?", a: "Tells the compiler the variable's value may change unexpectedly (e.g., hardware).", tip: "Prevents the compiler from optimizing it out." },
+
+    // --- PYTHON (10 Cards) ---
+    { sub: "py", t: "Mutability", q: "Which Python types are immutable?", a: "Strings, Tuples, Ints, and Floats.", tip: "You cannot change a character in a string directly." },
+    { sub: "py", t: "Decorators", q: "What is a Decorator?", a: "A function that wraps another function to extend its behavior.", tip: "Uses the @symbol syntax." },
+    { sub: "py", t: "List Comprehension", q: "What is List Comprehension?", a: "A concise way to create lists using a single line of code.", tip: "[x for x in range(10) if x % 2 == 0]" },
+    { sub: "py", t: "GIL", q: "What is the Global Interpreter Lock (GIL)?", a: "A mutex that allows only one thread to execute Python bytecode at a time.", tip: "This makes CPU-bound threading slower in Python." },
+    { sub: "py", t: "Init", q: "What is __init__ in a class?", a: "The constructor method called when an object is instantiated.", tip: "Always include 'self' as the first argument." },
+    { sub: "py", t: "Slicing", q: "What does my_list[::-1] do?", a: "It returns a reversed copy of the list.", tip: "Efficient way to reverse strings too!" },
+    { sub: "py", t: "Args/Kwargs", q: "Difference between *args and **kwargs?", a: "*args handles positional arguments (list); **kwargs handles named ones (dict).", tip: "Great for writing flexible functions." },
+    { sub: "py", t: "Lambda", q: "What is a Lambda function?", a: "An anonymous, one-line function.", tip: "Example: lambda x: x * 2" },
+    { sub: "py", t: "Pickle", q: "What is the 'pickle' module?", a: "Used for serializing and de-serializing Python objects.", tip: "Don't unpickle data from untrusted sources." },
+    { sub: "py", t: "Generators", q: "What is the 'yield' keyword?", a: "Turns a function into a generator that returns items one by one.", tip: "Much more memory efficient than lists for large data." },
+
+    // --- JAVA (10 Cards) ---
+    { sub: "java", t: "JVM", q: "What is Bytecode?", a: "Intermediate code produced by the Java compiler, runnable on any JVM.", tip: "This is why Java is 'Platform Independent'." },
+    { sub: "java", t: "Static", q: "What does 'static' mean in Java?", a: "The member belongs to the class itself rather than instances of the class.", tip: "Static methods cannot access non-static variables." },
+    { sub: "java", t: "Final", q: "Final vs Finally vs Finalize?", a: "Final: Constant; Finally: Exception block; Finalize: Cleanup (deprecated).", tip: "Final classes cannot be inherited." },
+    { sub: "java", t: "Strings", q: "Why are Strings immutable in Java?", a: "For security, caching, and the String Pool efficiency.", tip: "Use StringBuilder for heavy string manipulations." },
+    { sub: "java", t: "Inheritance", q: "Does Java support multiple inheritance?", a: "No, classes can only extend one superclass (to avoid Diamond Problem).", tip: "Use Interfaces to achieve multiple inheritance." },
+    { sub: "java", t: "Interfaces", q: "What is a Functional Interface?", a: "An interface with exactly one abstract method.", tip: "Required for using Lambda expressions in Java." },
+    { sub: "java", t: "Overloading", q: "Difference between Overloading and Overriding?", a: "Overloading: Same name, different params; Overriding: Same name, same params in child.", tip: "Overloading is Compile-time; Overriding is Runtime." },
+    { sub: "java", t: "Access Modifiers", q: "What is 'Protected' access?", a: "Accessible within the same package and by subclasses in other packages.", tip: "Private < Default < Protected < Public." },
+    { sub: "java", t: "Collections", q: "ArrayList vs Vector?", a: "ArrayList is non-synchronized (faster); Vector is synchronized (thread-safe).", tip: "Use ArrayList for most modern apps." },
+    { sub: "java", t: "Garbage Collection", q: "Can we force Garbage Collection?", a: "No, we can only suggest it via System.gc().", tip: "Java manages memory automatically." },
+
+    // --- DATA STRUCTURES (10 Cards) ---
+    { sub: "ds", t: "Binary Search", q: "Time complexity of Binary Search?", a: "O(log n).", tip: "Requirement: The array must be sorted!" },
+    { sub: "ds", t: "Hash Map", q: "What is a Hash Collision?", a: "When two different keys result in the same hash index.", tip: "Resolved by Chaining or Open Addressing." },
+    { sub: "ds", t: "Graphs", q: "BFS vs DFS?", a: "BFS uses a Queue (Layer by layer); DFS uses a Stack (Deep as possible).", tip: "BFS finds shortest paths in unweighted graphs." },
+    { sub: "ds", t: "Big O", q: "What is O(n^2)?", a: "Quadratic time complexity; performance drops fast as N grows.", tip: "Think: Nested loops (like Bubble Sort)." },
+    { sub: "ds", t: "Linked List", q: "Singly vs Doubly Linked List?", a: "Singly has one pointer (Next); Doubly has two (Next & Prev).", tip: "Doubly is easier to delete nodes from." },
+    { sub: "ds", t: "Heaps", q: "What is a Max-Heap?", a: "A tree where the parent is always greater than or equal to its children.", tip: "Root is always the maximum element." },
+    { sub: "ds", t: "BST", q: "Property of a Binary Search Tree?", a: "Left Child < Parent < Right Child.", tip: "In-order traversal always returns sorted data." },
+    { sub: "ds", t: "Arrays", q: "What is an 'index out of bounds' error?", a: "Accessing an array at a position that doesn't exist.", tip: "Check your loops: start at 0, end at length-1." },
+    { sub: "ds", t: "Stack", q: "Practical use of a Stack?", a: "Undo/Redo features, Function call stacks, and Bracket matching.", tip: "Last In, First Out (LIFO)." },
+    { sub: "ds", t: "Recursion", q: "What is the Base Case?", a: "The condition that stops the recursive calls.", tip: "Without a base case, you'll get a Stack Overflow!" },
+
+    // --- DBMS (10 Cards) ---
+    { sub: "dbms", t: "ACID", q: "What does ACID stand for?", a: "Atomicity, Consistency, Isolation, Durability.", tip: "Crucial for reliable transaction processing." },
+    { sub: "dbms", t: "Normalization", q: "What is 1NF?", a: "A table where every cell contains atomic (indivisible) values.", tip: "Removes duplicate groups." },
+    { sub: "dbms", t: "Keys", q: "Primary Key vs Unique Key?", a: "Primary Key: No NULLs allowed, only one per table. Unique: One NULL allowed, multiple per table.", tip: "Both enforce uniqueness." },
+    { sub: "dbms", t: "SQL", q: "DELETE vs TRUNCATE?", a: "DELETE is DML (removes rows, loggable); TRUNCATE is DDL (clears table, faster).", tip: "Truncate cannot be rolled back in some DBs." },
+    { sub: "dbms", t: "Joins", q: "What is a Left Join?", a: "Returns all rows from the left table and matched rows from the right.", tip: "Unmatched right rows show as NULL." },
+    { sub: "dbms", t: "Indexing", q: "Why use Indexes?", a: "To speed up data retrieval (SELECT queries) at the cost of slower writes.", tip: "Think of it as a book index." },
+    { sub: "dbms", t: "Foreign Key", q: "What is Referential Integrity?", a: "Rule ensuring that a foreign key value must exist in the parent table.", tip: "Prevents 'orphan' records." },
+    { sub: "dbms", t: "Aggregate", q: "What is the HAVING clause?", a: "Used to filter results of a GROUP BY query.", tip: "WHERE filters rows; HAVING filters groups." },
+    { sub: "dbms", t: "NoSQL", q: "SQL vs NoSQL?", a: "SQL: Relational/Structured; NoSQL: Non-relational/Document/Key-Value.", tip: "NoSQL is better for scaling and unstructured data." },
+    { sub: "dbms", t: "Views", q: "What is a View?", a: "A virtual table based on the result-set of an SQL statement.", tip: "Provides security by hiding complex queries." }
+];
+
+let filteredCards = [...flashcardDB];
+let currentCardIndex = 0;
+
+function filterCards() {
+    const query = document.getElementById('card-search').value.toLowerCase();
+    const sub = document.getElementById('card-subject-filter').value;
+
+    filteredCards = flashcardDB.filter(c => {
+        const matchesSearch = c.t.toLowerCase().includes(query) || c.q.toLowerCase().includes(query);
+        const matchesSub = sub === 'all' || c.sub === sub;
+        return matchesSearch && matchesSub;
+    });
+
+    currentCardIndex = 0;
+    updateCardUI();
+}
+
+function updateCardUI() {
+    const card = document.getElementById('main-card');
+    card.classList.remove('flipped'); // Reset flip on change
+
+    if (filteredCards.length === 0) {
+        document.getElementById('card-q').innerText = "No flashcards found. Try another topic.";
+        document.getElementById('card-a').innerText = "Try searching for 'Pointers' or 'JVM'.";
+        document.getElementById('card-counter').innerText = "0 of 0";
+        return;
+    }
+
+    const data = filteredCards[currentCardIndex];
+    document.getElementById('card-tag').innerText = data.sub.toUpperCase();
+    document.getElementById('card-q').innerText = data.q;
+    document.getElementById('card-a').innerText = data.a;
+    document.getElementById('card-tip').innerText = data.tip ? `PRO TIP: ${data.tip}` : "";
+    document.getElementById('card-counter').innerText = `Card ${currentCardIndex + 1} of ${filteredCards.length}`;
+}
+
+function nextCard() {
+    if (currentCardIndex < filteredCards.length - 1) {
+        currentCardIndex++;
+        updateCardUI();
+    }
+}
+
+function prevCard() {
+    if (currentCardIndex > 0) {
+        currentCardIndex--;
+        updateCardUI();
+    }
+}
+
+
+
+function executeToss() {
+    const opt1 = document.getElementById('opt-1').value || "Option A";
+    const opt2 = document.getElementById('opt-2').value || "Option B";
+    const coin = document.getElementById('coin');
+    const resultDisplay = document.getElementById('toss-result');
+    const btn = document.getElementById('toss-btn');
+
+    // Reset and Start
+    btn.disabled = true;
+    resultDisplay.classList.remove('winner-glow');
+    resultDisplay.innerText = "Tossing...";
+
+    // Randomize 0 or 1
+    const isOptionA = Math.random() < 0.5;
+    
+    // Calculate spins (at least 5 full rotations + final face)
+    // rotateY(1800) is 5 full spins. 180 is the other side.
+    const finalRotation = isOptionA ? 1800 : 1980; 
+
+    // Animate
+    coin.style.transform = `rotateY(${finalRotation}deg) translateY(-100px)`;
+
+    // Sound (Optional lightweight ting)
+    try {
+        const audio = new Audio('https://www.soundjay.com/misc/sounds/coin-flip-88.mp3');
+        audio.volume = 0.3;
+        audio.play();
+    } catch(e) {}
+
+    setTimeout(() => {
+        // Bring coin back down
+        coin.style.transform = `rotateY(${finalRotation}deg) translateY(0)`;
+        
+        // Show result
+        const winner = isOptionA ? opt1 : opt2;
+        resultDisplay.innerText = `Decision: ${winner}`;
+        resultDisplay.classList.add('winner-glow');
+        btn.disabled = false;
+        
+        // Dynamic coin icons update based on inputs
+        document.querySelector('.side-a').innerText = opt1[0].toUpperCase();
+        document.querySelector('.side-b').innerText = opt2[0].toUpperCase();
+    }, 3000);
+}
 
 
    </script>
