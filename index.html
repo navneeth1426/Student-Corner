@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--/* PWA Manifest */-->
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#38bdf8">
+<link rel="icon" href="C:\Users\DELL\Downloads\file_0000000049307206bf302b88c5868cf7(1) (1).png">
+
     <title>Nexus OS | Productivity Suite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -1335,6 +1341,9 @@ header {
 
 
     </style>
+
+
+
 </head>
 <body>
 
@@ -2935,6 +2944,14 @@ function executeToss() {
         document.querySelector('.side-a').innerText = opt1[0].toUpperCase();
         document.querySelector('.side-b').innerText = opt2[0].toUpperCase();
     }, 3000);
+}
+
+
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("SW registered"))
+    .catch(err => console.log("SW failed", err));
 }
 
 
